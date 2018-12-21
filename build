@@ -5,4 +5,4 @@ if [ -n "$DEBUG" ]; then
     set -x
 fi
 
-docker build . -t sidler/slack-py:onbuild
+docker build . -t itsre/slack-py:3.6-onbuild
