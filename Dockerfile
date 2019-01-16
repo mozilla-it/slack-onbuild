@@ -17,8 +17,6 @@ ONBUILD ENV APP_PORT=8080
 ONBUILD ENV APP_WORKERS=2
 ONBUILD ENV APP_MODULE=main:app
 
-ARG KUBECTL_VERSION
-
 ONBUILD COPY requirements.txt /usr/src/app/
 ONBUILD RUN pip install --no-cache-dir -r requirements.txt
 
