@@ -22,7 +22,8 @@ ARG KUBECTL_VERSION
 ONBUILD COPY requirements.txt /usr/src/app/
 ONBUILD RUN pip install --no-cache-dir -r requirements.txt
 
-ONBUILD COPY . /usr/src/app
+# add bundled source code
+ONBUILD ADD app.tar.gz /usr/src/app/
 
 # add non-priviledged user
 ONBUILD RUN groupadd --gid $APP_GID $APP_USER && \
