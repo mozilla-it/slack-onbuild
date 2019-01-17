@@ -20,15 +20,15 @@ ONBUILD ENV APP_MODULE=main:app
 ONBUILD COPY requirements.txt /usr/src/app/
 ONBUILD RUN pip install --no-cache-dir -r requirements.txt
 
-# add bundled source code
-ONBUILD ADD app.tar.gz /usr/src/app/
-
 # add non-priviledged user
 ONBUILD RUN groupadd --gid $APP_GID $APP_USER && \
     adduser --uid $APP_UID --disabled-password --gecos '' --ingroup $APP_USER --no-create-home $APP_USER
 
-CMD sh -c "/usr/local/bin/hypercorn -w ${APP_WORKERS} -b :${APP_PORT} ${APP_MODULE}"
+# add bundled source code
+ONBUILD ADD app.tar.gz /usr/src/app/
 
 # change user
 ONBUILD RUN chown $APP_USER:$APP_USER -R .
 ONBUILD USER $APP_USER
+
+CMD sh -c "/usr/local/bin/hypercorn -w ${APP_WORKERS} -b :${APP_PORT} ${APP_MODULE}"
