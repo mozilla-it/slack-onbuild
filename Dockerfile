@@ -1,4 +1,4 @@
-FROM python:3.6
+FROM python:3.6-slim
 
 # lifted straight from https://github.com/docker-library/python/blob/7eca63adca38729424a9bab957f006f5caad870f/3.6/onbuild/Dockerfile
 WORKDIR /usr/src/app/
