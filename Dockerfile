@@ -4,19 +4,18 @@ FROM python:3.6-slim
 WORKDIR /usr/src/app/
 RUN mkdir -p /usr/src/app/
 
-# Extra python env
-ONBUILD ENV PYTHONUNBUFFERED=1, \
-    PYTHONDONTWRITEBYTECODE=1, \
-    PIP_DISABLE_PIP_VERSION_CHECK=1
-
 # build args with defaults
-ONBUILD ENV APP_UID=1000
-ONBUILD ENV APP_GID=1000
-ONBUILD ENV APP_USER=slack
-ONBUILD ENV APP_PORT=8080
-ONBUILD ENV APP_WORKERS=2
-ONBUILD ENV APP_MODULE=main:app
-ONBUILD ENV APP_SRCTAR=.src.tar.gz
+ONBUILD ENV \
+    PYTHONUNBUFFERED=1, \
+    PYTHONDONTWRITEBYTECODE=1, \
+    PIP_DISABLE_PIP_VERSION_CHECK=1, \
+    APP_UID=1000, \
+    APP_GID=1000, \
+    APP_USER=slack, \
+    APP_PORT=8080, \
+    APP_WORKERS=2, \
+    APP_MODULE=main:app, \
+    APP_SRCTAR=.src.tar.gz
 
 ONBUILD COPY requirements.txt /usr/src/app/
 ONBUILD RUN pip install --no-cache-dir -r requirements.txt
